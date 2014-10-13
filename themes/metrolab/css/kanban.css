@@ -1,0 +1,65 @@
+/* Kanban */
+.kanban-container {
+    overflow-x: auto;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.kanban-stage {
+    background: #cccccc;
+    width: 250px;
+    float: left;
+    margin-left: 15px;
+    padding: 5px;
+}
+
+.kanban-stage:first-child {
+    margin: 0;
+}
+
+.kanban-stage .kanban-title {
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+    background: #dedede;
+    color: #000;
+    margin-bottom: 5px;
+}
+
+.kanban-body {
+    min-height: 50px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: auto;
+}
+
+.kanban-item {
+    background: #fff;
+    padding: 10px 5px;
+    cursor: pointer;
+    margin: 5px 2px 2px 2px;
+}
+
+ul .kanban-item:first-child {
+    margin: 2px;
+}
+
+.kanban-item:hover {
+    box-shadow: 0px 0px 2px #000;
+    -moz-box-shadow: 0px 0px 2px #000;
+    -webkit-box-shadow: 0px 0px 2px #000;
+}
+
+.kanban-item-title {
+    font-weight: bold;
+    color: #0e90d2;
+}
+
+.kanban-item label {
+    display: inline;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.kanban-body .ui-state-highlight { height: 100px; background: #bbb; border: none; box-shadow: none; margin: 5px 2px 2px 2px; }
