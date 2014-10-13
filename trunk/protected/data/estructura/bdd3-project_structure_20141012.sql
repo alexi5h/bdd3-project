@@ -1,44 +1,13 @@
-﻿# Host: localhost  (Version: 5.6.12)
-# Date: 2014-10-12 23:00:35
+﻿# Host: localhost  (Version: 5.5.24-log)
+# Date: 2014-10-13 00:56:12
 # Generator: MySQL-Front 5.3  (Build 4.136)
 
 /*!40101 SET NAMES utf8 */;
 
 #
-# Structure for table "banco"
-#
-
-DROP TABLE IF EXISTS `banco`;
-CREATE TABLE `banco` (
-  `ID` int(11) NOT NULL,
-  `NRO_CUENTA` varchar(20) NOT NULL,
-  `TIPO_CUENTA` enum('AHORRO','CORRIENTE') NOT NULL,
-  `NOMBRE_BANCO` varchar(20) NOT NULL,
-  `SALDO` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-#
-# Structure for table "banco_deposito"
-#
-
-DROP TABLE IF EXISTS `banco_deposito`;
-CREATE TABLE `banco_deposito` (
-  `ID` int(11) NOT NULL,
-  `NRO_COMPROBANTE` varchar(20) NOT NULL,
-  `VALOR` decimal(10,2) NOT NULL,
-  `BANCO_ID` int(11) NOT NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `NRO_COMPROBANTE_UNIQUE` (`NRO_COMPROBANTE`),
-  KEY `FK_RELATIONSHIP_11` (`BANCO_ID`),
-  CONSTRAINT `FK_RELATIONSHIP_11` FOREIGN KEY (`BANCO_ID`) REFERENCES `banco` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-#
 # Structure for table "curso"
 #
 
-DROP TABLE IF EXISTS `curso`;
 CREATE TABLE `curso` (
   `ID` int(11) NOT NULL,
   `NOMBRE` varchar(20) NOT NULL,
@@ -52,7 +21,6 @@ CREATE TABLE `curso` (
 # Structure for table "curso_edicion"
 #
 
-DROP TABLE IF EXISTS `curso_edicion`;
 CREATE TABLE `curso_edicion` (
   `ID` int(11) NOT NULL,
   `HORARIO` varchar(20) NOT NULL,
@@ -70,7 +38,6 @@ CREATE TABLE `curso_edicion` (
 # Structure for table "material_didactico"
 #
 
-DROP TABLE IF EXISTS `material_didactico`;
 CREATE TABLE `material_didactico` (
   `ID` int(11) NOT NULL,
   `NOMBRE` varchar(20) NOT NULL,
@@ -81,7 +48,6 @@ CREATE TABLE `material_didactico` (
 # Structure for table "curso_has_mat_didactico"
 #
 
-DROP TABLE IF EXISTS `curso_has_mat_didactico`;
 CREATE TABLE `curso_has_mat_didactico` (
   `MAT_DIDACTICO_ID` int(11) NOT NULL,
   `CURSO_ID` int(11) NOT NULL,
@@ -95,7 +61,6 @@ CREATE TABLE `curso_has_mat_didactico` (
 # Structure for table "persona"
 #
 
-DROP TABLE IF EXISTS `persona`;
 CREATE TABLE `persona` (
   `ID` int(11) NOT NULL,
   `CEDULA` varchar(20) NOT NULL,
@@ -108,19 +73,15 @@ CREATE TABLE `persona` (
   `LUGAR_TRABAJO` varchar(20) NOT NULL,
   `TIPO_PERSONA` enum('ESTUDIANTE','PARTICULAR','INSTRUCTOR') NOT NULL,
   `NRO_CURSOS_APROBADOS` int(11) DEFAULT NULL,
-  `BANCO_ID` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `CEDULA_UNIQUE` (`CEDULA`),
-  UNIQUE KEY `RUC_UNIQUE` (`RUC`),
-  KEY `FK_RELATIONSHIP_7` (`BANCO_ID`),
-  CONSTRAINT `FK_RELATIONSHIP_7` FOREIGN KEY (`BANCO_ID`) REFERENCES `banco` (`ID`)
+  UNIQUE KEY `RUC_UNIQUE` (`RUC`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 #
 # Structure for table "formulario"
 #
 
-DROP TABLE IF EXISTS `formulario`;
 CREATE TABLE `formulario` (
   `ID` int(11) NOT NULL,
   `CONOCIMIENTOS` int(11) DEFAULT NULL,
@@ -143,7 +104,6 @@ CREATE TABLE `formulario` (
 # Structure for table "faltas_estudiante"
 #
 
-DROP TABLE IF EXISTS `faltas_estudiante`;
 CREATE TABLE `faltas_estudiante` (
   `ID` int(11) NOT NULL,
   `NRO_FALTAS` int(11) NOT NULL,
@@ -161,7 +121,6 @@ CREATE TABLE `faltas_estudiante` (
 # Structure for table "evaluacion_estudiante"
 #
 
-DROP TABLE IF EXISTS `evaluacion_estudiante`;
 CREATE TABLE `evaluacion_estudiante` (
   `ID` int(11) NOT NULL,
   `NOTA` int(11) NOT NULL,
@@ -178,7 +137,6 @@ CREATE TABLE `evaluacion_estudiante` (
 # Structure for table "curso_edicion_has_personas"
 #
 
-DROP TABLE IF EXISTS `curso_edicion_has_personas`;
 CREATE TABLE `curso_edicion_has_personas` (
   `PERSONA_ID` int(11) NOT NULL,
   `CURSO_EDICION_ID` int(11) NOT NULL,
@@ -192,7 +150,6 @@ CREATE TABLE `curso_edicion_has_personas` (
 # Structure for table "certificado"
 #
 
-DROP TABLE IF EXISTS `certificado`;
 CREATE TABLE `certificado` (
   `ID` int(11) NOT NULL,
   `ENTREGADO` enum('SI','NO') NOT NULL,
@@ -209,7 +166,6 @@ CREATE TABLE `certificado` (
 # Structure for table "centro_recaudacion_depositos"
 #
 
-DROP TABLE IF EXISTS `centro_recaudacion_depositos`;
 CREATE TABLE `centro_recaudacion_depositos` (
   `ID` int(11) NOT NULL,
   `NRO_FACTURA` varchar(20) NOT NULL,
@@ -221,4 +177,35 @@ CREATE TABLE `centro_recaudacion_depositos` (
   KEY `FK_RELATIONSHIP_9` (`PERSONA_ID`),
   CONSTRAINT `FK_RELATIONSHIP_9` FOREIGN KEY (`PERSONA_ID`) REFERENCES `persona` (`ID`),
   CONSTRAINT `FK_RELATIONSHIP_10` FOREIGN KEY (`CURSO_EDICION_ID`) REFERENCES `curso_edicion` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+#
+# Structure for table "banco"
+#
+
+CREATE TABLE `banco` (
+  `ID` int(11) NOT NULL,
+  `NRO_CUENTA` varchar(20) NOT NULL,
+  `TIPO_CUENTA` enum('AHORRO','CORRIENTE') NOT NULL,
+  `NOMBRE_BANCO` varchar(20) NOT NULL,
+  `SALDO` decimal(10,2) NOT NULL,
+  `PERSONA_ID` int(11) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `fk_banco_persona1_idx` (`PERSONA_ID`),
+  CONSTRAINT `fk_banco_persona1` FOREIGN KEY (`PERSONA_ID`) REFERENCES `persona` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+#
+# Structure for table "banco_deposito"
+#
+
+CREATE TABLE `banco_deposito` (
+  `ID` int(11) NOT NULL,
+  `NRO_COMPROBANTE` varchar(20) NOT NULL,
+  `VALOR` decimal(10,2) NOT NULL,
+  `BANCO_ID` int(11) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `NRO_COMPROBANTE_UNIQUE` (`NRO_COMPROBANTE`),
+  KEY `FK_RELATIONSHIP_11` (`BANCO_ID`),
+  CONSTRAINT `FK_RELATIONSHIP_11` FOREIGN KEY (`BANCO_ID`) REFERENCES `banco` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -17,9 +17,14 @@ return array(
         'application.models.*',
         'application.components.*',
         'ext.AweCrud.components.*',
+        'application.modules.crm.models.*',
+        'application.modules.banco.models.*',
+        'application.modules.curso.models.*',
     ),
     'modules' => array(
         'crm',
+        'curso',
+        'banco',
         // uncomment the following to enable the Gii tool
         'gii' => array(
             'class' => 'system.gii.GiiModule',
@@ -56,19 +61,17 @@ return array(
                 '<module:\w+>/<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>'
             ),
         ),
-        'db' => array(
-            'connectionString' => 'sqlite:' . dirname(__FILE__) . '/../data/testdrive.db',
-        ),
+//        'db' => array(
+//            'connectionString' => 'sqlite:' . dirname(__FILE__) . '/../data/testdrive.db',
+//        ),
         // uncomment the following to use a MySQL database
-        /*
-          'db'=>array(
-          'connectionString' => 'mysql:host=localhost;dbname=testdrive',
-          'emulatePrepare' => true,
-          'username' => 'root',
-          'password' => '',
-          'charset' => 'utf8',
-          ),
-         */
+        'db' => array(
+            'connectionString' => 'mysql:host=127.0.0.1;dbname=bdd3-project',
+            'emulatePrepare' => true,
+            'username' => 'root',
+            'password' => '',
+            'charset' => 'utf8',
+        ),
         'messages' => array(
             // 'class' => 'MessageSource',
             //'basePath'=>Yiibase::getPathOfAlias('application.messages'),
