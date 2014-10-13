@@ -1,5 +1,5 @@
-﻿# Host: localhost  (Version: 5.5.24-log)
-# Date: 2014-10-12 21:31:44
+﻿# Host: localhost  (Version: 5.6.12)
+# Date: 2014-10-12 23:00:35
 # Generator: MySQL-Front 5.3  (Build 4.136)
 
 /*!40101 SET NAMES utf8 */;
@@ -8,6 +8,7 @@
 # Structure for table "banco"
 #
 
+DROP TABLE IF EXISTS `banco`;
 CREATE TABLE `banco` (
   `ID` int(11) NOT NULL,
   `NRO_CUENTA` varchar(20) NOT NULL,
@@ -21,6 +22,7 @@ CREATE TABLE `banco` (
 # Structure for table "banco_deposito"
 #
 
+DROP TABLE IF EXISTS `banco_deposito`;
 CREATE TABLE `banco_deposito` (
   `ID` int(11) NOT NULL,
   `NRO_COMPROBANTE` varchar(20) NOT NULL,
@@ -36,6 +38,7 @@ CREATE TABLE `banco_deposito` (
 # Structure for table "curso"
 #
 
+DROP TABLE IF EXISTS `curso`;
 CREATE TABLE `curso` (
   `ID` int(11) NOT NULL,
   `NOMBRE` varchar(20) NOT NULL,
@@ -49,6 +52,7 @@ CREATE TABLE `curso` (
 # Structure for table "curso_edicion"
 #
 
+DROP TABLE IF EXISTS `curso_edicion`;
 CREATE TABLE `curso_edicion` (
   `ID` int(11) NOT NULL,
   `HORARIO` varchar(20) NOT NULL,
@@ -66,6 +70,7 @@ CREATE TABLE `curso_edicion` (
 # Structure for table "material_didactico"
 #
 
+DROP TABLE IF EXISTS `material_didactico`;
 CREATE TABLE `material_didactico` (
   `ID` int(11) NOT NULL,
   `NOMBRE` varchar(20) NOT NULL,
@@ -76,6 +81,7 @@ CREATE TABLE `material_didactico` (
 # Structure for table "curso_has_mat_didactico"
 #
 
+DROP TABLE IF EXISTS `curso_has_mat_didactico`;
 CREATE TABLE `curso_has_mat_didactico` (
   `MAT_DIDACTICO_ID` int(11) NOT NULL,
   `CURSO_ID` int(11) NOT NULL,
@@ -89,6 +95,7 @@ CREATE TABLE `curso_has_mat_didactico` (
 # Structure for table "persona"
 #
 
+DROP TABLE IF EXISTS `persona`;
 CREATE TABLE `persona` (
   `ID` int(11) NOT NULL,
   `CEDULA` varchar(20) NOT NULL,
@@ -113,6 +120,7 @@ CREATE TABLE `persona` (
 # Structure for table "formulario"
 #
 
+DROP TABLE IF EXISTS `formulario`;
 CREATE TABLE `formulario` (
   `ID` int(11) NOT NULL,
   `CONOCIMIENTOS` int(11) DEFAULT NULL,
@@ -135,6 +143,7 @@ CREATE TABLE `formulario` (
 # Structure for table "faltas_estudiante"
 #
 
+DROP TABLE IF EXISTS `faltas_estudiante`;
 CREATE TABLE `faltas_estudiante` (
   `ID` int(11) NOT NULL,
   `NRO_FALTAS` int(11) NOT NULL,
@@ -152,6 +161,7 @@ CREATE TABLE `faltas_estudiante` (
 # Structure for table "evaluacion_estudiante"
 #
 
+DROP TABLE IF EXISTS `evaluacion_estudiante`;
 CREATE TABLE `evaluacion_estudiante` (
   `ID` int(11) NOT NULL,
   `NOTA` int(11) NOT NULL,
@@ -168,6 +178,7 @@ CREATE TABLE `evaluacion_estudiante` (
 # Structure for table "curso_edicion_has_personas"
 #
 
+DROP TABLE IF EXISTS `curso_edicion_has_personas`;
 CREATE TABLE `curso_edicion_has_personas` (
   `PERSONA_ID` int(11) NOT NULL,
   `CURSO_EDICION_ID` int(11) NOT NULL,
@@ -181,6 +192,7 @@ CREATE TABLE `curso_edicion_has_personas` (
 # Structure for table "certificado"
 #
 
+DROP TABLE IF EXISTS `certificado`;
 CREATE TABLE `certificado` (
   `ID` int(11) NOT NULL,
   `ENTREGADO` enum('SI','NO') NOT NULL,
@@ -197,6 +209,7 @@ CREATE TABLE `certificado` (
 # Structure for table "centro_recaudacion_depositos"
 #
 
+DROP TABLE IF EXISTS `centro_recaudacion_depositos`;
 CREATE TABLE `centro_recaudacion_depositos` (
   `ID` int(11) NOT NULL,
   `NRO_FACTURA` varchar(20) NOT NULL,
