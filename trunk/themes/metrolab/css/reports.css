@@ -1,0 +1,100 @@
+
+ .row-fluid > div > .highcharts-container {
+
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius:15px !important; 
+    -moz-border-radius:3px; /* Firefox */ 
+    -webkit-border-radius:3px; /* Safari y Chrome */ 
+    border: solid 1px;
+    background: white;
+
+
+} 
+.metas {
+    border-radius:15px !important; 
+    -moz-border-radius:3px; /* Firefox */ 
+    -webkit-border-radius:3px; /* Safari y Chrome */ 
+    border: solid 1px;
+    background: white;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    height: 280px;
+
+} 
+div.metas h1{
+    margin-top: 30px;
+    font-size: 450%!important;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color:#4A8BC2;
+}
+
+div.metas h3{
+    font-size: 280%!important;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+    margin-bottom: 40px;
+}
+div.metas h4{
+    font-size: 250%!important;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+
+.porcentaje {
+    border-radius:15px !important; 
+    -moz-border-radius:3px; /* Firefox */ 
+    -webkit-border-radius:3px; /* Safari y Chrome */ 
+    border: solid 1px;
+    background: white;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    height: 100px;
+
+} 
+
+.sinmargen{
+    margin-left: 0px!important; 
+}
+
+
+.segundalinea {
+    margin-top: 0px!important;
+    height: 165px;
+
+} 
+div.porcentaje.span12 h1 {
+    margin-top: 28px;
+    font-size: 380%!important;
+} 
+div.porcentaje h1{
+    margin-top: 2px;
+    font-size: 280%!important;
+    margin-bottom: 2px;
+    font-weight: bold;
+    color:#4A8BC2;
+}
+
+div.porcentaje h3{
+    margin-top: 10px!important;
+    margin-bottom: 10px!important;
+    font-size: 300%!important;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+}
+div.porcentaje h4{
+    font-size: 180%!important;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+
+}
+.controles {
+    margin-bottom: 25px;
+
+}
+
+/*DATEPICKER*/
+.hasDatepicker{
+    cursor: pointer!important;
+    background: #FFF!important;
+}

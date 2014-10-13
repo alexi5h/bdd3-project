@@ -1,0 +1,233 @@
+/*fixes cruge*/
+div.form .form-group {
+    border: none;
+}
+.form-group {
+    box-shadow: none !important;
+    padding: 0px !important;
+}
+.btn-new-password {
+    margin-bottom: 11px;
+}
+.control-group label.success {
+    color: #468847;
+}
+.control-group input.success {
+    border-color: #468847;
+}
+.control-group label.error {
+    color: #b94a48;
+}
+.control-group input.error {
+    border-color: #b94a48;
+}
+.control-group .errorMessage {
+    color: #b94a48;
+    margin-bottom: 5px;
+}
+
+#list-auth-items {
+    margin-top: 10px;
+    border: none;
+    box-shadow: none;
+    padding: 0px;
+}
+
+.authname span {
+    display: inline-block;
+    padding: 3px 10px;
+}
+.empty {
+    padding: 8px 35px 8px 14px;
+}
+.crugepanel {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+}
+ul.auth-item li {
+    border: none;
+    box-shadow: none;
+}
+
+
+
+/* CUSTOM FIXES */
+.modal form {
+    margin: 0;
+}
+
+.empty-portlet {
+    display: block;
+    padding: 15px;
+}
+
+.empty-portlet i {
+    font-size: 50px;
+}
+
+.top-controlls {
+    margin-bottom: 20px;
+    /*background: #e8e8e8;*/
+}
+
+.icon-move {
+    cursor: move;
+}
+
+.email-senter-content {
+    height: 100px;
+}
+
+.email-sender .control-label,
+.sms-sender .control-label {
+    width: 70px !important;
+}
+
+.email-sender .controls,
+.sms-sender .controls {
+    margin-left: 70px !important;
+}
+
+.check-box-list { padding-left: 20px; }
+.radio-list .controls { padding-top: 5px; }
+.radio-list .radio { display: block; }
+
+.permisos .controls {
+    margin-left: 160px;
+}
+
+.control-group label {
+    margin: 0;
+}
+
+form { margin: 0 !important; }
+
+.name-title {
+    float: left;
+}
+
+.star-title {
+    float: left;
+    padding: 25px 10px 0;
+}
+
+.ui-tooltip {
+    display: none !important;
+}
+
+.empty-model {
+    padding: 30px 0;
+}
+
+.empty-model-icon {
+    padding: 50px 25px;
+    font-size: 200px;
+    text-align: center;
+}
+
+.empty-model-description {
+    padding: 50px;
+    border-left: solid 5px #008AC5;
+    min-height: 200px !important;
+}
+
+.empty-model-description .btn {
+    margin-top: 10px; 
+}
+
+.empty-model-description h1 {
+    font-weight: bold;
+    font-size: 50px;
+    color: #008AC5;
+}
+
+.empty-model-header {
+    margin: 0 0 30px;
+}
+
+.empty-model-cuote {
+    color: #008AC5;
+    font-size: 40px;
+    line-height: 1.2;
+    font-style: italic;
+}
+
+.empty-model-cuote-author {
+    line-height: 1.5;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+.grid-view .summary {
+    margin-bottom: 0;
+    margin-top: 5px;
+    text-align: right;
+}
+
+.control-group.success .control-label, .control-group.success .help-block, .control-group.success .help-inline {
+    color: #888888 !important;
+}
+
+/* SELECT2 */
+.select2-container .select2-choice { height: 28px; }
+.select2-container .select2-choice span { padding: 1px 0; }
+.select2-container .select2-choice div b { background-position: 0 2px; }
+.select2-container .select2-choice { background: #fff; }
+.select2-container .select2-choice div { background: #eee;  }
+
+/* TAREAS */
+.widget-tareas {
+    max-height: 300px;
+    overflow: auto;
+}
+
+#mainModal .table {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.center {
+    text-align: center;
+}
+
+.etapa-filter {
+    padding: 4px 0;
+    text-align: right;
+}
+
+.etapa-filter input {
+    margin: 0;
+    position: relative;
+    top: -1px;
+}
+.gridAdmin th{
+    white-space: nowrap;
+}
+
+
+/**
+Permite mostrar la linea de seguimiento en el widget que represtenta
+el time-line para trullo, solo cuando se use un tblistview al momento de crear
+de usar inifinite scroll
+*/
+
+div#lista-infinita div.items {
+    margin: 30px 0 0 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+}
+
+/* The line */
+div#lista-infinita div.items:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #E5E5E5;
+    left: 18%;
+    margin-left: -6px;
+}

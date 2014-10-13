@@ -1,0 +1,184 @@
+/* Dropdown control */
+.selectBox-dropdown {
+    /*min-width: 150px;*/
+    min-height: 30px !important;
+    height: 30px;
+    position: relative;
+    border: solid 1px #AAA;
+    line-height: inherit;
+    text-decoration: none;
+    text-align: left;
+    color: #444 !important;
+    outline: none;
+    vertical-align: middle;
+    background: #FFFFFF;
+    display: inline-block;
+    cursor: default;
+    margin: 0 4px 0 0 !important;
+    overflow: hidden;
+}
+
+.error .selectBox-dropdown {
+    border: solid 1px #B94A48 !important;
+}
+
+.selectBox-dropdown:focus,
+.selectBox-dropdown:focus .selectBox-arrow {
+    /*border-color: #666;*/
+}
+
+.selectBox-dropdown.selectBox-menuShowing-bottom {
+    -moz-border-radius-bottomleft: 0;
+    -moz-border-radius-bottomright: 0;
+    -webkit-border-bottom-left-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.selectBox-dropdown.selectBox-menuShowing-top {
+    -moz-border-radius-topleft: 0;
+    -moz-border-radius-topright: 0;
+    -webkit-border-top-left-radius: 0;
+    -webkit-border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.selectBox-dropdown .selectBox-label {
+    padding: 4px 8px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.selectBox-dropdown .selectBox-arrow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 18px;
+    height: 100%;
+    background: #EEEEEE;
+    border-left: solid 1px #AAAAAA;
+}
+
+.selectBox-dropdown .selectBox-arrow:after {
+    content: "";
+    background: url(../images/jquery.selectBox-arrow.png) 50% center no-repeat;
+    display: block;
+    width: 18px;
+    height: 100%;
+}
+
+/* Dropdown menu */
+.selectBox-dropdown-menu {
+    position: absolute;
+    z-index: 99999;
+    max-height: 200px;
+    min-height: 1em;
+    border: solid 1px #AAAAAA; /* should be the same border width as .selectBox-dropdown */
+    background: #FFF;
+    -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+    -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 5px !important;
+}
+
+/* Inline control */
+.selectBox-inline {
+    min-width: 150px;
+    outline: none;
+    border: solid 1px #BBB;
+    background: #FFF;
+    display: inline-block;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    overflow: auto;
+}
+
+.selectBox-inline:focus {
+    border-color: #666;
+}
+
+/* Options */
+.selectBox-options,
+.selectBox-options LI,
+.selectBox-options LI A {
+    list-style: none;
+    display: block;
+    cursor: default;
+    padding: 0;
+    margin: 0;
+}
+
+.selectBox-options.selectBox-options-top{
+    border-bottom:none;
+	margin-top:1px;
+	-moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.selectBox-options.selectBox-options-bottom{
+    border-top:none;
+    -moz-border-radius-bottomleft: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.selectBox-options LI A {
+    line-height: 1.5;
+    padding: 0 .5em;
+    white-space: nowrap;
+    overflow: hidden;
+    background: 6px center no-repeat;
+    color: #000000;
+    text-decoration: none;
+    padding: 4px 6px;
+}
+
+.selectBox-options LI.selectBox-hover A {
+    background-color: #3875D7;
+    color: #FFFFFF;
+}
+
+.selectBox-options LI.selectBox-disabled A {
+    color: #888;
+    background-color: transparent;
+}
+
+.selectBox-options .selectBox-optgroup {
+    color: #666;
+    background: #EEE;
+    font-weight: bold;
+    line-height: 1.5;
+    padding: 0 .3em;
+    white-space: nowrap;
+}
+
+/* Disabled state */
+.selectBox.selectBox-disabled {
+    color: #888 !important;
+}
+
+.selectBox-dropdown.selectBox-disabled .selectBox-arrow {
+    opacity: .5;
+    filter: alpha(opacity=50);
+    border-color: #666;
+}
+
+.selectBox-inline.selectBox-disabled {
+    color: #888 !important;
+}
+
+.selectBox-inline.selectBox-disabled .selectBox-options A {
+    background-color: transparent !important;
+}
