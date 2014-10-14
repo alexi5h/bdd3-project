@@ -35,8 +35,8 @@ abstract class BaseBanco extends AweActiveRecord {
 
     public function rules() {
         return array(
-            array('ID, NRO_CUENTA, TIPO_CUENTA, NOMBRE_BANCO, SALDO, PERSONA_ID', 'required'),
-            array('ID, PERSONA_ID', 'numerical', 'integerOnly'=>true),
+            array('NRO_CUENTA, TIPO_CUENTA, NOMBRE_BANCO, SALDO, PERSONA_ID', 'required'),
+            array('PERSONA_ID', 'numerical', 'integerOnly'=>true),
             array('NRO_CUENTA, NOMBRE_BANCO', 'length', 'max'=>20),
             array('TIPO_CUENTA', 'length', 'max'=>9),
             array('SALDO', 'length', 'max'=>10),

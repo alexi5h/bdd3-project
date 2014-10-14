@@ -21,7 +21,7 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     <div class="widget-body">
 
 
-        <?php echo $form->textFieldRow($model, 'ID') ?>
+        <?php // echo $form->textFieldRow($model, 'ID') ?>
 
         <?php echo $form->textFieldRow($model, 'CEDULA', array('maxlength' => 20)) ?>
 
@@ -41,7 +41,7 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
 
         <?php echo $form->dropDownListRow($model, 'TIPO_PERSONA', array('ESTUDIANTE' => 'ESTUDIANTE', 'PARTICULAR' => 'PARTICULAR', 'INSTRUCTOR' => 'INSTRUCTOR',)) ?>
 
-<?php echo $form->textFieldRow($model, 'NRO_CURSOS_APROBADOS') ?>
+        <?php echo $form->textFieldRow($model, 'NRO_CURSOS_APROBADOS') ?>
     </div>        
 
     <div class="form-actions">

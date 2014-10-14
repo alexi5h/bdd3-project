@@ -34,8 +34,7 @@ abstract class BaseCurso extends AweActiveRecord {
 
     public function rules() {
         return array(
-            array('ID, NOMBRE, CONTENIDO', 'required'),
-            array('ID', 'numerical', 'integerOnly'=>true),
+            array('NOMBRE, CONTENIDO', 'required'),
             array('NOMBRE, ESPECIALIDAD', 'length', 'max'=>20),
             array('CONTENIDO, PRERREQUISITOS', 'length', 'max'=>100),
             array('PRERREQUISITOS, ESPECIALIDAD', 'default', 'setOnEmpty' => true, 'value' => null),
