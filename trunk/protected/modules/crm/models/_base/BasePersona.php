@@ -46,8 +46,8 @@ abstract class BasePersona extends AweActiveRecord {
 
     public function rules() {
         return array(
-            array('ID, CEDULA, NOMBRES, APELLIDOS, DIRECCION, TELEFONO, LUGAR_TRABAJO, TIPO_PERSONA', 'required'),
-            array('ID, NRO_CURSOS_APROBADOS', 'numerical', 'integerOnly'=>true),
+            array('CEDULA, NOMBRES, APELLIDOS, DIRECCION, TELEFONO, LUGAR_TRABAJO, TIPO_PERSONA', 'required'),
+            array('NRO_CURSOS_APROBADOS', 'numerical', 'integerOnly'=>true),
             array('CEDULA, RUC, NOMBRES, APELLIDOS, TELEFONO, LUGAR_TRABAJO', 'length', 'max'=>20),
             array('DIRECCION', 'length', 'max'=>100),
             array('TITULOS_ACADEMICOS', 'length', 'max'=>70),
