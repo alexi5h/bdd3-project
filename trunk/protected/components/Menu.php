@@ -9,7 +9,9 @@ class Menu {
         $items = array(
             array('label' => '<i class="icon-home"></i> Home', 'url' => Yii::app()->homeUrl),
             array('label' => '<i class="icon-briefcase"></i> ' . Persona::label(2), 'url' => array('/crm/persona/admin'), 'active_rules' => array('module' => 'crm', 'controller' => 'persona')),
-//            array('label' => '<i class="icon-money"></i> ' . Ahorro::label(2), 'url' => array('/ahorro/ahorro/admin'), 'access' => 'action_ahorro_admin', 'active_rules' => array('module' => 'ahorro', 'controller' => 'ahorro')),
+            array('label' => '<i class="icon-book"></i> ' . Curso::label(2), 'url' => array('/curso/curso/admin'), 'active_rules' => array('module' => 'curso', 'controller' => 'curso')),
+            array('label' => '<i class="icon-book"></i> ' . CursoEdicion::label(2), 'url' => array('/curso/cursoEdicion/admin'), 'active_rules' => array('module' => 'curso', 'controller' => 'cursoEdicion')),
+            array('label' => '<i class="icon-book"></i> ' . Horario::label(2), 'url' => array('/curso/horario/admin'), 'active_rules' => array('module' => 'curso', 'controller' => 'horario')),
 //            array('label' => '<i class="icon-usd"></i> ' . AhorroRetiro::label(2), 'url' => array('/ahorro/ahorroRetiro/admin'), 'access' => 'action_ahorroRetiro_admin', 'active_rules' => array('module' => 'ahorro', 'controller' => 'ahorroRetiro')),
 //            array('label' => '<i class="icon-shopping-cart"></i> '.Credito::label(2), 'url' => array('/credito/credito/admin'), 'access' => 'action_credito_admin', 'active_rules' => array('module' => 'credito', 'controller' => 'credito')),
 //            array('label' => '<i class="icon-book"></i>  Pagos', 'url' => '#', 'items' => array(

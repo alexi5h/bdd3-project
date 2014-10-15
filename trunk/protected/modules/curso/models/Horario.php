@@ -1,11 +1,11 @@
 <?php
 
-Yii::import('curso.models._base.BaseCursoEdicion');
+Yii::import('curso.models._base.BaseHorario');
 
-class CursoEdicion extends BaseCursoEdicion
+class Horario extends BaseHorario
 {
     /**
-     * @return CursoEdicion
+     * @return Horario
      */
     public static function model($className = __CLASS__)
     {
@@ -14,7 +14,7 @@ class CursoEdicion extends BaseCursoEdicion
 
     public static function label($n = 1)
     {
-        return Yii::t('app', 'Curso Edición|Curso Ediciones', $n);
+        return Yii::t('app', 'Horario|Horarios', $n);
     }
 
 }
