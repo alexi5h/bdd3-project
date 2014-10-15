@@ -12,8 +12,8 @@ class Menu {
             array('label' => '<i class="icon-book"></i> ' . Curso::label(2), 'url' => array('/curso/curso/admin'), 'active_rules' => array('module' => 'curso', 'controller' => 'curso')),
             array('label' => '<i class="icon-book"></i> ' . CursoEdicion::label(2), 'url' => array('/curso/cursoEdicion/admin'), 'active_rules' => array('module' => 'curso', 'controller' => 'cursoEdicion')),
             array('label' => '<i class="icon-book"></i> ' . Horario::label(2), 'url' => array('/curso/horario/admin'), 'active_rules' => array('module' => 'curso', 'controller' => 'horario')),
-//            array('label' => '<i class="icon-usd"></i> ' . AhorroRetiro::label(2), 'url' => array('/ahorro/ahorroRetiro/admin'), 'access' => 'action_ahorroRetiro_admin', 'active_rules' => array('module' => 'ahorro', 'controller' => 'ahorroRetiro')),
-//            array('label' => '<i class="icon-shopping-cart"></i> '.Credito::label(2), 'url' => array('/credito/credito/admin'), 'access' => 'action_credito_admin', 'active_rules' => array('module' => 'credito', 'controller' => 'credito')),
+            array('label' => '<i class="icon-book"></i> ' . EvaluacionEstudiante::label(2), 'url' => array('/curso/evaluacionEstudiante/admin'), 'active_rules' => array('module' => 'curso', 'controller' => 'evaluacionEstudiante')),
+            array('label' => '<i class="icon-book"></i> ' . FaltasEstudiante::label(2), 'url' => array('/curso/faltasEstudiante/admin'), 'active_rules' => array('module' => 'curso', 'controller' => 'faltasEstudiante')),
 //            array('label' => '<i class="icon-book"></i>  Pagos', 'url' => '#', 'items' => array(
 //                array('label' => '<i class="icon-briefcase"></i> Pagos', 'url' => array('/pagos/pago/admin'), 'access' => 'action_pago_admin', 'active_rules' => array('module' => 'pagos', 'controller' => 'pago')),
 //                array('label' => '<i class="icon-briefcase"></i> Depositos', 'url' => array('/pagos/deposito/admin'), 'access' => 'action_deposito_admin', 'active_rules' => array('module' => 'pagos', 'controller' => 'deposito')),
