@@ -69,7 +69,7 @@ return array(
             'connectionString' => 'mysql:host=127.0.0.1;dbname=bdd3-project',
             'emulatePrepare' => true,
             'username' => 'root',
-            'password' => 'root',
+            'password' => '',
             'charset' => 'utf8',
         ),
         'messages' => array(

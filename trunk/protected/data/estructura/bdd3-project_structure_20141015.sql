@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.5.24-log)
-# Date: 2014-10-15 01:22:57
+# Date: 2014-10-15 02:53:29
 # Generator: MySQL-Front 5.3  (Build 4.136)
 
 /*!40101 SET NAMES utf8 */;
@@ -15,7 +15,7 @@ CREATE TABLE `curso` (
   `PRERREQUISITOS` varchar(100) DEFAULT NULL,
   `ESPECIALIDAD` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 #
 # Structure for table "horario"
@@ -47,7 +47,7 @@ CREATE TABLE `curso_edicion` (
   KEY `fk_curso_edicion_horario1_idx` (`HORARIO_ID`),
   CONSTRAINT `FK_RELATIONSHIP_8` FOREIGN KEY (`CURSO_ID`) REFERENCES `curso` (`ID`),
   CONSTRAINT `fk_curso_edicion_horario1` FOREIGN KEY (`HORARIO_ID`) REFERENCES `horario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 #
 # Structure for table "material_didactico"
@@ -208,7 +208,7 @@ CREATE TABLE `banco` (
   PRIMARY KEY (`ID`),
   KEY `fk_banco_persona1_idx` (`PERSONA_ID`),
   CONSTRAINT `fk_banco_persona1` FOREIGN KEY (`PERSONA_ID`) REFERENCES `persona` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 #
 # Structure for table "banco_deposito"
@@ -219,11 +219,52 @@ CREATE TABLE `banco_deposito` (
   `NRO_COMPROBANTE` varchar(20) NOT NULL,
   `VALOR` decimal(10,2) NOT NULL,
   `BANCO_ID` int(11) NOT NULL,
+  `CURSO_EDICION_ID` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `NRO_COMPROBANTE_UNIQUE` (`NRO_COMPROBANTE`),
   KEY `FK_RELATIONSHIP_11` (`BANCO_ID`),
+  KEY `fk_banco_deposito_curso_edicion1_idx` (`CURSO_EDICION_ID`),
+  CONSTRAINT `fk_banco_deposito_curso_edicion1` FOREIGN KEY (`CURSO_EDICION_ID`) REFERENCES `curso_edicion` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_RELATIONSHIP_11` FOREIGN KEY (`BANCO_ID`) REFERENCES `banco` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+#
+# Procedure "pa_detalles_instructor"
+#
+
+CREATE PROCEDURE `pa_detalles_instructor`(cedulaIns varchar(20))
+BEGIN
+select cu.nombre as nombre_curso, ce.id as edicion_id, ce.fecha_inicio, ce.fecha_finalizacion, bd.valor
+from curso cu inner join curso_edicion ce on cu.id=ce.curso_id
+inner join banco_deposito bd on ce.id=bd.curso_edicion_id
+inner join banco ba on bd.banco_id=ba.id
+inner join persona pe on ba.persona_id=pe.id
+where pe.cedula=cedulaIns and pe.tipo_persona='INSTRUCTOR';
+END;
+
+#
+# Trigger "control_num_matriculas"
+#
+
+CREATE DEFINER='root'@'localhost' TRIGGER `bdd3-project`.`control_num_matriculas` AFTER INSERT ON `bdd3-project`.`curso_edicion_has_personas`
+  FOR EACH ROW begin
+DECLARE num_estudiantes int(11);
+DECLARE condicion varchar(20);
+-- select num-estudiantes de la edición del curso
+select NRO_ESTUDIANTES into num_estudiantes from curso_edicion
+where id=new.curso_edicion_id;
+-- select de comprobación del tipo de persona registrada
+select TIPO_PERSONA into condicion from persona
+where id=new.persona_id;
+if condicion='ESTUDIANTE' then
+	if num_estudiantes < 25 then
+		update curso_edicion set NRO_ESTUDIANTES=NRO_ESTUDIANTES+1
+		where id=new.CURSO_EDICION_ID;
+	else
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'CUPO LLENO!' ;
+	end if;
+end if;
+end;
 
 #
 # Trigger "curso_aprobado"
