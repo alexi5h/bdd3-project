@@ -10,13 +10,18 @@ partition by list(tipo_persona)(
 	partition partDefault values in (2,3)
 );
 
+
+
+
+
+
 explain partitions select * from persona;
 explain select * from persona;
 
 delete from persona where id=3;
 
 SELECT table_rows FROM information_schema.partitions 
-WHERE table_schema = 'bdd3-project' and table_name ='persona' and partition_name='partDefault';
+WHERE table_schema = 'bdd3-project' and table_name ='persona';
 
 
-insert into persona values(3,'1003652888',null,'Alexis','Hidalgo','Caranqui','0980505815','Bachiller','UTN',3,0);
+insert into persona values(default,'1003652888',null,'Alexis','Hidalgo','Caranqui','0980505815','Bachiller','UTN',2,0);
