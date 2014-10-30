@@ -8,6 +8,9 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'enableAjaxValidation' => true,
     'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
     'enableClientValidation' => false,
+    'htmlOptions' => array(
+        'enctype' => 'multipart/form-data',
+    ),
         ));
 ?>
 <div class="widget blue">
@@ -39,26 +42,26 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
 
         <?php echo $form->textFieldRow($model, 'LUGAR_TRABAJO', array('maxlength' => 20)) ?>
 
-        <?php echo $form->dropDownListRow($model, 'TIPO_PERSONA', array('ESTUDIANTE' => 'ESTUDIANTE', 'PARTICULAR' => 'PARTICULAR', 'INSTRUCTOR' => 'INSTRUCTOR',)) ?>
+        <?php echo $form->dropDownListRow($model, 'TIPO_PERSONA', array('' => ' -- Seleccione -- ', 1 => 'ESTUDIANTE', 2 => 'PARTICULAR', 3 => 'INSTRUCTOR'), array('placeholder' => null)) ?>
 
-        <?php echo $form->textFieldRow($model, 'NRO_CURSOS_APROBADOS') ?>
-    </div>        
+        <?php // echo $form->textFieldRow($model, 'NRO_CURSOS_APROBADOS') ?>
+        <?php echo $form->fileFieldRow($model, 'FOTO'); ?>
 
-    <div class="form-actions">
-        <?php
-        $this->widget('bootstrap.widgets.TbButton', array(
-            'buttonType' => 'submit',
-            'type' => 'success',
-            'label' => $model->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
-        ));
-        ?>
-        <?php
-        $this->widget('bootstrap.widgets.TbButton', array(
-            'label' => Yii::t('AweCrud.app', 'Cancel'),
-            'htmlOptions' => array('onclick' => 'javascript:history.go(-1)')
-        ));
-        ?>
+        <div class = "form-actions">
+            <?php
+            $this->widget('bootstrap.widgets.TbButton', array(
+                'buttonType' => 'submit',
+                'type' => 'success',
+                'label' => $model->isNewRecord ? Yii::t('AweCrud.app', 'Create') : Yii::t('AweCrud.app', 'Save'),
+            ));
+            ?>
+            <?php
+            $this->widget('bootstrap.widgets.TbButton', array(
+                'label' => Yii::t('AweCrud.app', 'Cancel'),
+                'htmlOptions' => array('onclick' => 'javascript:history.go(-1)')
+            ));
+            ?>
+        </div>
     </div>
-</div>
 </div>
 <?php $this->endWidget(); ?>

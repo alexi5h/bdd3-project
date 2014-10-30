@@ -24,4 +24,4 @@ SELECT table_rows FROM information_schema.partitions
 WHERE table_schema = 'bdd3-project' and table_name ='persona';
 
 
-insert into persona values(default,'1003652888',null,'Alexis','Hidalgo','Caranqui','0980505815','Bachiller','UTN',2,0);
+insert into persona values(default,'1003652888',null,'Alexis','Hidalgo','Caranqui','0980505815','Bachiller','UTN',2,0,null);

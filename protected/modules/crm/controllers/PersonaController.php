@@ -26,11 +26,47 @@ class PersonaController extends AweController {
      */
     public function actionCreate() {
         $model = new Persona;
-
+        $data = null;
         $this->performAjaxValidation($model, 'persona-form');
 
         if (isset($_POST['Persona'])) {
+//            var_dump($_FILES["Persona"]["error"]["FOTO"]);
+//            die();
+            //comprobamos si ha ocurrido un error.
+            if (!isset($_FILES["Persona"]) || $_FILES["Persona"]["error"]["FOTO"] > 0) {
+                echo "ha ocurrido un error";
+            } else {
+                //ahora vamos a verificar si el tipo de archivo es un tipo de imagen permitido.
+                //y que el tamano del archivo no exceda los 16MB
+                $permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
+                $limite_kb = 16384;
+
+                if (in_array($_FILES['Persona']['type']["FOTO"], $permitidos) && $_FILES['Persona']['size']["FOTO"] <= $limite_kb * 1024) {
+                    //este es el archivo temporal
+                    $imagen_temporal = $_FILES['Persona']['tmp_name']["FOTO"];
+                    //este es el tipo de archivo
+                    $tipo = $_FILES['Persona']['type']["FOTO"];
+                    //leer el archivo temporal en binario
+                    $fp = fopen($imagen_temporal, 'r+b');
+                    $data = fread($fp, filesize($imagen_temporal));
+                    fclose($fp);
+
+                    //escapar los caracteres
+                    $data = mysql_real_escape_string($data);
+
+//                    $resultado = @mysql_query("INSERT INTO imagenes (imagen, tipo_imagen) VALUES ('$data', '$tipo')");
+//
+//                    if ($resultado) {
+//                        echo "el archivo ha sido copiado exitosamente";
+//                    } else {
+//                        echo "ocurrio un error al copiar el archivo.";
+//                    }
+                } else {
+                    echo "archivo no permitido, es tipo de archivo prohibido o excede el tamano de $limite_kb Kilobytes";
+                }
+            }
             $model->attributes = $_POST['Persona'];
+            $model->FOTO = $data;
 //            var_dump($_POST['Persona']);
 //            die();
             if ($model->save()) {
@@ -94,9 +130,11 @@ class PersonaController extends AweController {
     public function actionAdmin() {
         $model = new Persona('search');
         $model->unsetAttributes(); // clear any default values
-        if (isset($_GET['Persona']))
+        if (isset($_GET['Persona'])) {
             $model->attributes = $_GET['Persona'];
-
+        }
+//        var_dump($model->findAll());
+//        die();
         $this->render('admin', array(
             'model' => $model,
         ));
