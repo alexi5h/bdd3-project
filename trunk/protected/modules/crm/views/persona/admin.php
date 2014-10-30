@@ -6,6 +6,7 @@ $this->menu = array(
     //'visible' => (Util::checkAccess(array('action_incidenciaPrioridad_create')))
     ),
 );
+//var_dump($model->search()->getData());
 ?>
 <div id="flashMsg"  class="flash-messages">
 
@@ -39,6 +40,12 @@ $this->menu = array(
                     'filter' => array('ESTUDIANTE' => 'ESTUDIANTE', 'PARTICULAR' => 'PARTICULAR', 'INSTRUCTOR' => 'INSTRUCTOR',),
                 ),
 //                        'NRO_CURSOS_APROBADOS',
+                array(
+                    'name' => 'FOTO',
+//                    'value' => 'CHtml::tag("img", array("src" => $data->obtenerImagen()))',
+                    'value' =>  'Chtml::image($data->obtenerImagen())',
+                    'type'=>'raw'
+                ),
                 array(
                     'class' => 'CButtonColumn',
                     'template' => '{update} {delete}',

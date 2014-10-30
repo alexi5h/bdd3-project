@@ -7,7 +7,7 @@
  * property or method in class "Persona".
  *
  * Columns in table "persona" available as properties of the model,
- * followed by relations of table "persona" available as properties of the model.
+ * and there are no model relations.
  *
  * @property integer $ID
  * @property string $CEDULA
@@ -18,17 +18,10 @@
  * @property string $TELEFONO
  * @property string $TITULOS_ACADEMICOS
  * @property string $LUGAR_TRABAJO
- * @property string $TIPO_PERSONA
+ * @property integer $TIPO_PERSONA
  * @property integer $NRO_CURSOS_APROBADOS
+ * @property string $FOTO
  *
- * @property Banco[] $bancos
- * @property CentroRecaudacionDepositos[] $centroRecaudacionDepositoses
- * @property Certificado[] $certificados
- * @property CursoEdicion[] $cursoEdicions
- * @property EvaluacionEstudiante[] $evaluacionEstudiantes
- * @property FaltasEstudiante[] $faltasEstudiantes
- * @property Formulario[] $formularios
- * @property Formulario[] $formularios1
  */
 abstract class BasePersona extends AweActiveRecord {
 
@@ -47,27 +40,18 @@ abstract class BasePersona extends AweActiveRecord {
     public function rules() {
         return array(
             array('CEDULA, NOMBRES, APELLIDOS, DIRECCION, TELEFONO, LUGAR_TRABAJO, TIPO_PERSONA', 'required'),
-            array('NRO_CURSOS_APROBADOS', 'numerical', 'integerOnly'=>true),
+            array('TIPO_PERSONA, NRO_CURSOS_APROBADOS', 'numerical', 'integerOnly'=>true),
             array('CEDULA, RUC, NOMBRES, APELLIDOS, TELEFONO, LUGAR_TRABAJO', 'length', 'max'=>20),
             array('DIRECCION', 'length', 'max'=>100),
             array('TITULOS_ACADEMICOS', 'length', 'max'=>70),
-            array('TIPO_PERSONA', 'length', 'max'=>10),
-            array('TIPO_PERSONA', 'in', 'range' => array('ESTUDIANTE','PARTICULAR','INSTRUCTOR')), // enum,
-            array('RUC, TITULOS_ACADEMICOS, NRO_CURSOS_APROBADOS', 'default', 'setOnEmpty' => true, 'value' => null),
-            array('ID, CEDULA, RUC, NOMBRES, APELLIDOS, DIRECCION, TELEFONO, TITULOS_ACADEMICOS, LUGAR_TRABAJO, TIPO_PERSONA, NRO_CURSOS_APROBADOS', 'safe', 'on'=>'search'),
+            array('FOTO', 'safe'),
+            array('RUC, TITULOS_ACADEMICOS, NRO_CURSOS_APROBADOS, FOTO', 'default', 'setOnEmpty' => true, 'value' => null),
+            array('ID, CEDULA, RUC, NOMBRES, APELLIDOS, DIRECCION, TELEFONO, TITULOS_ACADEMICOS, LUGAR_TRABAJO, TIPO_PERSONA, NRO_CURSOS_APROBADOS, FOTO', 'safe', 'on'=>'search'),
         );
     }
 
     public function relations() {
         return array(
-            'bancos' => array(self::HAS_MANY, 'Banco', 'PERSONA_ID'),
-            'centroRecaudacionDepositoses' => array(self::HAS_MANY, 'CentroRecaudacionDepositos', 'PERSONA_ID'),
-            'certificados' => array(self::HAS_MANY, 'Certificado', 'PERSONA_ID'),
-            'cursoEdicions' => array(self::MANY_MANY, 'CursoEdicion', 'curso_edicion_has_personas(PERSONA_ID, CURSO_EDICION_ID)'),
-            'evaluacionEstudiantes' => array(self::HAS_MANY, 'EvaluacionEstudiante', 'PERSONA_ID'),
-            'faltasEstudiantes' => array(self::HAS_MANY, 'FaltasEstudiante', 'PERSONA_ID'),
-            'formularios' => array(self::HAS_MANY, 'Formulario', 'ESTUDIANTE_ID'),
-            'formularios1' => array(self::HAS_MANY, 'Formulario', 'INSTRUCTOR_ID'),
         );
     }
 
@@ -87,14 +71,7 @@ abstract class BasePersona extends AweActiveRecord {
                 'LUGAR_TRABAJO' => Yii::t('app', 'Lugar Trabajo'),
                 'TIPO_PERSONA' => Yii::t('app', 'Tipo Persona'),
                 'NRO_CURSOS_APROBADOS' => Yii::t('app', 'Nro Cursos Aprobados'),
-                'bancos' => null,
-                'centroRecaudacionDepositoses' => null,
-                'certificados' => null,
-                'cursoEdicions' => null,
-                'evaluacionEstudiantes' => null,
-                'faltasEstudiantes' => null,
-                'formularios' => null,
-                'formularios1' => null,
+                'FOTO' => Yii::t('app', 'Foto'),
         );
     }
 
@@ -110,8 +87,9 @@ abstract class BasePersona extends AweActiveRecord {
         $criteria->compare('TELEFONO', $this->TELEFONO, true);
         $criteria->compare('TITULOS_ACADEMICOS', $this->TITULOS_ACADEMICOS, true);
         $criteria->compare('LUGAR_TRABAJO', $this->LUGAR_TRABAJO, true);
-        $criteria->compare('TIPO_PERSONA', $this->TIPO_PERSONA, true);
+        $criteria->compare('TIPO_PERSONA', $this->TIPO_PERSONA);
         $criteria->compare('NRO_CURSOS_APROBADOS', $this->NRO_CURSOS_APROBADOS);
+        $criteria->compare('FOTO', $this->FOTO, true);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
