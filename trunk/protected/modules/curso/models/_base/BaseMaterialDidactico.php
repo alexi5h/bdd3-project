@@ -12,7 +12,7 @@
  * @property integer $ID
  * @property string $NOMBRE
  *
- * @property Curso[] $cursos
+ * @property CursoEdicion[] $cursoEdicions
  */
 abstract class BaseMaterialDidactico extends AweActiveRecord {
 
@@ -38,7 +38,7 @@ abstract class BaseMaterialDidactico extends AweActiveRecord {
 
     public function relations() {
         return array(
-            'cursos' => array(self::MANY_MANY, 'Curso', 'curso_has_mat_didactico(MAT_DIDACTICO_ID, CURSO_ID)'),
+            'cursoEdicions' => array(self::MANY_MANY, 'CursoEdicion', 'curso_has_mat_didactico(MAT_DIDACTICO_ID, CURSO_EDICION_ID)'),
         );
     }
 
@@ -49,7 +49,7 @@ abstract class BaseMaterialDidactico extends AweActiveRecord {
         return array(
                 'ID' => Yii::t('app', 'ID'),
                 'NOMBRE' => Yii::t('app', 'Nombre'),
-                'cursos' => null,
+                'cursoEdicions' => null,
         );
     }
 

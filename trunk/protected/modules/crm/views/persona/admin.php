@@ -6,10 +6,13 @@ $this->menu = array(
     //'visible' => (Util::checkAccess(array('action_incidenciaPrioridad_create')))
     ),
 );
-//var_dump($model->search()->getData());
+//$val=$model->search()->getData();
+//$foto=$val[4]['FOTO'];
+//var_dump(Persona::model()->obtenerImagen());
+//die();
+//var_dump($foto);
 ?>
 <div id="flashMsg"  class="flash-messages">
-
 </div> 
 <div class="widget blue">
     <div class="widget-title">
@@ -27,6 +30,11 @@ $this->menu = array(
             'type' => 'striped bordered hover advance',
             'dataProvider' => $model->search(),
             'columns' => array(
+                array(
+                    'name' => 'FOTO',
+                    'value' => 'CHtml::image(Yii::app()->createUrl("/crm/persona/imagen?id=$data->ID"),"",array("width"=>"60"))',
+                    'type' => 'raw'
+                ),
                 'CEDULA',
                 'RUC',
                 'NOMBRES',
@@ -40,12 +48,6 @@ $this->menu = array(
                     'filter' => array('ESTUDIANTE' => 'ESTUDIANTE', 'PARTICULAR' => 'PARTICULAR', 'INSTRUCTOR' => 'INSTRUCTOR',),
                 ),
 //                        'NRO_CURSOS_APROBADOS',
-                array(
-                    'name' => 'FOTO',
-//                    'value' => 'CHtml::tag("img", array("src" => $data->obtenerImagen()))',
-                    'value' =>  'Chtml::image($data->obtenerImagen())',
-                    'type'=>'raw'
-                ),
                 array(
                     'class' => 'CButtonColumn',
                     'template' => '{update} {delete}',

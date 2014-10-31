@@ -16,7 +16,6 @@
  * @property string $SALDO
  * @property integer $PERSONA_ID
  *
- * @property Persona $pERSONA
  * @property BancoDeposito[] $bancoDepositos
  */
 abstract class BaseBanco extends AweActiveRecord {
@@ -47,7 +46,6 @@ abstract class BaseBanco extends AweActiveRecord {
 
     public function relations() {
         return array(
-            'pERSONA' => array(self::BELONGS_TO, 'Persona', 'PERSONA_ID'),
             'bancoDepositos' => array(self::HAS_MANY, 'BancoDeposito', 'BANCO_ID'),
         );
     }
@@ -63,7 +61,6 @@ abstract class BaseBanco extends AweActiveRecord {
                 'NOMBRE_BANCO' => Yii::t('app', 'Nombre Banco'),
                 'SALDO' => Yii::t('app', 'Saldo'),
                 'PERSONA_ID' => Yii::t('app', 'Persona'),
-                'pERSONA' => null,
                 'bancoDepositos' => null,
         );
     }

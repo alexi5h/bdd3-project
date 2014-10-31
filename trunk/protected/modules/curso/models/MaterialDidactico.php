@@ -14,7 +14,7 @@ class MaterialDidactico extends BaseMaterialDidactico
 
     public static function label($n = 1)
     {
-        return Yii::t('app', 'MaterialDidactico|MaterialDidacticos', $n);
+        return Yii::t('app', 'Material Didáctico|Materiales Didácticos', $n);
     }
 
 }

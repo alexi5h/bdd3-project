@@ -40,7 +40,8 @@ class PersonaController extends AweController {
                 //y que el tamano del archivo no exceda los 16MB
                 $permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
                 $limite_kb = 16384;
-
+//                var_dump($_FILES["Persona"]);
+//                die();
                 if (in_array($_FILES['Persona']['type']["FOTO"], $permitidos) && $_FILES['Persona']['size']["FOTO"] <= $limite_kb * 1024) {
                     //este es el archivo temporal
                     $imagen_temporal = $_FILES['Persona']['tmp_name']["FOTO"];
@@ -49,11 +50,13 @@ class PersonaController extends AweController {
                     //leer el archivo temporal en binario
                     $fp = fopen($imagen_temporal, 'r+b');
                     $data = fread($fp, filesize($imagen_temporal));
+//                    $data=  addslashes($data);
                     fclose($fp);
 
                     //escapar los caracteres
                     $data = mysql_real_escape_string($data);
-
+//                    var_dump($data);
+//                    die();
 //                    $resultado = @mysql_query("INSERT INTO imagenes (imagen, tipo_imagen) VALUES ('$data', '$tipo')");
 //
 //                    if ($resultado) {
@@ -66,10 +69,13 @@ class PersonaController extends AweController {
                 }
             }
             $model->attributes = $_POST['Persona'];
-            $model->FOTO = $data;
-//            var_dump($_POST['Persona']);
+
+//            $model->FOTO = $data;
+//            var_dump($model->FOTO);
 //            die();
             if ($model->save()) {
+                $id = $model->ID;
+                Persona::model()->guardarImg($id, $data);
 //                if (isset($_POST['Persona']['cursoEdicions']))
 //                    $model->saveManyMany('cursoEdicions', $_POST['Persona']['cursoEdicions']);
                 $this->redirect(array('admin'));
@@ -138,6 +144,35 @@ class PersonaController extends AweController {
         $this->render('admin', array(
             'model' => $model,
         ));
+    }
+
+    public function actionImagen($id) {
+        mysql_connect("localhost", "root", "") or die(mysql_error());
+        mysql_select_db("bdd3-project") or die(mysql_error());
+
+//si la variable imagen no ha sido definida nos dara un advertencia.
+//        $id = $_GET['id'];
+
+        if ($id > 0) {
+            //vamos a crear nuestra consulta SQL
+            $consulta = "SELECT FOTO FROM persona WHERE id = $id";
+            //con mysql_query la ejecutamos en nuestra base de datos indicada anteriormente
+            //de lo contrario mostraremos el error que ocaciono la consulta y detendremos la ejecucion.
+            $resultado = @mysql_query($consulta) or die(mysql_error());
+
+            //si el resultado fue exitoso
+            //obtendremos el dato que ha devuelto la base de datos
+            $datos = mysql_fetch_assoc($resultado);
+
+            //ruta va a obtener un valor parecido a "imagenes/nombre_imagen.jpg" por ejemplo
+            $imagen = $datos['FOTO'];
+            $tipo = 'image/jpeg';
+
+            //ahora colocamos la cabeceras correcta segun el tipo de imagen
+            header("Content-type: $tipo");
+
+            echo $imagen;
+        }
     }
 
     /**

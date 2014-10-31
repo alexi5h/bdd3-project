@@ -6,7 +6,7 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'type' => 'horizontal',
     'id' => 'curso-edicion-form',
     'enableAjaxValidation' => true,
-    'clientOptions' => array('validateOnSubmit' => false, 'validateOnChange' => true,),
+    'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => false,),
     'enableClientValidation' => false,
         ));
 ?>
@@ -50,9 +50,9 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
 
         <?php echo $form->textFieldRow($model, 'NRO_ESTUDIANTES') ?>
 
-        <?php echo $form->dropDownListRow($model, 'CURSO_ID', array('' => ' -- Seleccione -- ') + CHtml::listData(Curso::model()->findAll(), 'ID', Curso::representingColumn())) ?>
+        <?php echo $form->dropDownListRow($model, 'CURSO_ID', array('' => ' -- Seleccione -- ') + CHtml::listData(Curso::model()->findAll(), 'ID', Curso::representingColumn()), array('placeholder' => null)) ?>
 
-        <?php echo $form->dropDownListRow($model, 'HORARIO_ID', array('' => ' -- Seleccione -- ') + CHtml::listData(Horario::model()->findAll(), 'ID', Horario::representingColumn())) ?>
+        <?php echo $form->dropDownListRow($model, 'HORARIO_ID', array('' => ' -- Seleccione -- ') + CHtml::listData(Horario::model()->findAll(), 'ID', Horario::representingColumn()), array('placeholder' => null)) ?>
 
         <div class="form-actions">
             <?php
