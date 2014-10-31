@@ -14,7 +14,7 @@ class FaltasEstudiante extends BaseFaltasEstudiante
 
     public static function label($n = 1)
     {
-        return Yii::t('app', 'FaltasEstudiante|FaltasEstudiantes', $n);
+        return Yii::t('app', 'Faltas Estudiante|Faltas Estudiantes', $n);
     }
 
 }

@@ -7,11 +7,12 @@
  * property or method in class "CursoEdicionHasPersonas".
  *
  * Columns in table "curso_edicion_has_personas" available as properties of the model,
- * and there are no model relations.
+ * followed by relations of table "curso_edicion_has_personas" available as properties of the model.
  *
  * @property integer $PERSONA_ID
  * @property integer $CURSO_EDICION_ID
  *
+ * @property CursoEdicion $cURSOEDICION
  */
 abstract class BaseCursoEdicionHasPersonas extends AweActiveRecord {
 
@@ -40,6 +41,7 @@ abstract class BaseCursoEdicionHasPersonas extends AweActiveRecord {
 
     public function relations() {
         return array(
+            'cURSOEDICION' => array(self::BELONGS_TO, 'CursoEdicion', 'CURSO_EDICION_ID'),
         );
     }
 
@@ -50,6 +52,7 @@ abstract class BaseCursoEdicionHasPersonas extends AweActiveRecord {
         return array(
                 'PERSONA_ID' => Yii::t('app', 'Persona'),
                 'CURSO_EDICION_ID' => Yii::t('app', 'Curso Edicion'),
+                'cURSOEDICION' => null,
         );
     }
 

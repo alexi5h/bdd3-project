@@ -14,6 +14,9 @@ class Menu {
             array('label' => '<i class="icon-book"></i> ' . Horario::label(2), 'url' => array('/curso/horario/admin'), 'active_rules' => array('module' => 'curso', 'controller' => 'horario')),
             array('label' => '<i class="icon-book"></i> ' . EvaluacionEstudiante::label(2), 'url' => array('/curso/evaluacionEstudiante/admin'), 'active_rules' => array('module' => 'curso', 'controller' => 'evaluacionEstudiante')),
             array('label' => '<i class="icon-book"></i> ' . FaltasEstudiante::label(2), 'url' => array('/curso/faltasEstudiante/admin'), 'active_rules' => array('module' => 'curso', 'controller' => 'faltasEstudiante')),
+            array('label' => '<i class="icon-book"></i> ' . EdicionCurso::label(2), 'url' => array('/curso/edicionCurso/admin'), 'active_rules' => array('module' => 'curso', 'controller' => 'edicionCurso')),
+            array('label' => '<i class="icon-book"></i> ' . MaterialDidactico::label(2), 'url' => array('/curso/materialDidactico/admin'), 'active_rules' => array('module' => 'curso', 'controller' => 'materialDidactico')),
+            array('label' => '<i class="icon-book"></i> ' . Formulario::label(2), 'url' => array('/curso/formulario/admin'), 'active_rules' => array('module' => 'curso', 'controller' => 'formulario')),
 //            array('label' => '<i class="icon-book"></i>  Pagos', 'url' => '#', 'items' => array(
 //                array('label' => '<i class="icon-briefcase"></i> Pagos', 'url' => array('/pagos/pago/admin'), 'access' => 'action_pago_admin', 'active_rules' => array('module' => 'pagos', 'controller' => 'pago')),
 //                array('label' => '<i class="icon-briefcase"></i> Depositos', 'url' => array('/pagos/deposito/admin'), 'access' => 'action_deposito_admin', 'active_rules' => array('module' => 'pagos', 'controller' => 'deposito')),

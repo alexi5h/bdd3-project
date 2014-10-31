@@ -14,7 +14,7 @@ class EvaluacionEstudiante extends BaseEvaluacionEstudiante
 
     public static function label($n = 1)
     {
-        return Yii::t('app', 'EvaluacionEstudiante|EvaluacionEstudiantes', $n);
+        return Yii::t('app', 'Evaluación Estudiante|Evaluación Estudiantes', $n);
     }
 
 }

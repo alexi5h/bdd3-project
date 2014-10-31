@@ -10,6 +10,7 @@
  * followed by relations of table "curso_edicion" available as properties of the model.
  *
  * @property integer $ID
+ * @property integer $NRO_EDICION
  * @property string $FECHA_INICIO
  * @property string $FECHA_FINALIZACION
  * @property string $AULA
@@ -17,11 +18,12 @@
  * @property integer $CURSO_ID
  * @property integer $HORARIO_ID
  *
+ * @property BancoDeposito[] $bancoDepositos
  * @property CentroRecaudacionDepositos[] $centroRecaudacionDepositoses
  * @property Certificado[] $certificados
- * @property Curso $cURSO
  * @property Horario $hORARIO
- * @property Persona[] $personas
+ * @property CursoEdicionHasPersonas[] $cursoEdicionHasPersonases
+ * @property MaterialDidactico[] $materialDidacticos
  * @property EvaluacionEstudiante[] $evaluacionEstudiantes
  * @property FaltasEstudiante[] $faltasEstudiantes
  * @property Formulario[] $formularios
@@ -42,20 +44,21 @@ abstract class BaseCursoEdicion extends AweActiveRecord {
 
     public function rules() {
         return array(
-            array('FECHA_INICIO, FECHA_FINALIZACION, AULA, NRO_ESTUDIANTES, CURSO_ID, HORARIO_ID', 'required'),
-            array('NRO_ESTUDIANTES, CURSO_ID, HORARIO_ID', 'numerical', 'integerOnly'=>true),
+            array('ID, NRO_EDICION, FECHA_INICIO, FECHA_FINALIZACION, AULA, NRO_ESTUDIANTES, CURSO_ID, HORARIO_ID', 'required'),
+            array('ID, NRO_EDICION, NRO_ESTUDIANTES, CURSO_ID, HORARIO_ID', 'numerical', 'integerOnly'=>true),
             array('AULA', 'length', 'max'=>20),
-            array('ID, FECHA_INICIO, FECHA_FINALIZACION, AULA, NRO_ESTUDIANTES, CURSO_ID, HORARIO_ID', 'safe', 'on'=>'search'),
+            array('ID, NRO_EDICION, FECHA_INICIO, FECHA_FINALIZACION, AULA, NRO_ESTUDIANTES, CURSO_ID, HORARIO_ID', 'safe', 'on'=>'search'),
         );
     }
 
     public function relations() {
         return array(
+            'bancoDepositos' => array(self::HAS_MANY, 'BancoDeposito', 'CURSO_EDICION_ID'),
             'centroRecaudacionDepositoses' => array(self::HAS_MANY, 'CentroRecaudacionDepositos', 'CURSO_EDICION_ID'),
             'certificados' => array(self::HAS_MANY, 'Certificado', 'CURSO_EDICION_ID'),
-            'cURSO' => array(self::BELONGS_TO, 'Curso', 'CURSO_ID'),
             'hORARIO' => array(self::BELONGS_TO, 'Horario', 'HORARIO_ID'),
-            'personas' => array(self::MANY_MANY, 'Persona', 'curso_edicion_has_personas(CURSO_EDICION_ID, PERSONA_ID)'),
+            'cursoEdicionHasPersonases' => array(self::HAS_MANY, 'CursoEdicionHasPersonas', 'CURSO_EDICION_ID'),
+            'materialDidacticos' => array(self::MANY_MANY, 'MaterialDidactico', 'curso_has_mat_didactico(CURSO_EDICION_ID, MAT_DIDACTICO_ID)'),
             'evaluacionEstudiantes' => array(self::HAS_MANY, 'EvaluacionEstudiante', 'CURSO_EDICION_ID'),
             'faltasEstudiantes' => array(self::HAS_MANY, 'FaltasEstudiante', 'CURSO_EDICION_ID'),
             'formularios' => array(self::HAS_MANY, 'Formulario', 'CURSO_EDICION_ID'),
@@ -68,17 +71,19 @@ abstract class BaseCursoEdicion extends AweActiveRecord {
     public function attributeLabels() {
         return array(
                 'ID' => Yii::t('app', 'ID'),
+                'NRO_EDICION' => Yii::t('app', 'Nro Edicion'),
                 'FECHA_INICIO' => Yii::t('app', 'Fecha Inicio'),
                 'FECHA_FINALIZACION' => Yii::t('app', 'Fecha Finalizacion'),
                 'AULA' => Yii::t('app', 'Aula'),
                 'NRO_ESTUDIANTES' => Yii::t('app', 'Nro Estudiantes'),
                 'CURSO_ID' => Yii::t('app', 'Curso'),
                 'HORARIO_ID' => Yii::t('app', 'Horario'),
+                'bancoDepositos' => null,
                 'centroRecaudacionDepositoses' => null,
                 'certificados' => null,
-                'cURSO' => null,
                 'hORARIO' => null,
-                'personas' => null,
+                'cursoEdicionHasPersonases' => null,
+                'materialDidacticos' => null,
                 'evaluacionEstudiantes' => null,
                 'faltasEstudiantes' => null,
                 'formularios' => null,
@@ -89,6 +94,7 @@ abstract class BaseCursoEdicion extends AweActiveRecord {
         $criteria = new CDbCriteria;
 
         $criteria->compare('ID', $this->ID);
+        $criteria->compare('NRO_EDICION', $this->NRO_EDICION);
         $criteria->compare('FECHA_INICIO', $this->FECHA_INICIO, true);
         $criteria->compare('FECHA_FINALIZACION', $this->FECHA_FINALIZACION, true);
         $criteria->compare('AULA', $this->AULA, true);

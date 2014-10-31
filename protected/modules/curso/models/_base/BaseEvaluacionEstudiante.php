@@ -14,7 +14,6 @@
  * @property integer $PERSONA_ID
  * @property integer $CURSO_EDICION_ID
  *
- * @property Persona $pERSONA
  * @property CursoEdicion $cURSOEDICION
  */
 abstract class BaseEvaluacionEstudiante extends AweActiveRecord {
@@ -41,7 +40,6 @@ abstract class BaseEvaluacionEstudiante extends AweActiveRecord {
 
     public function relations() {
         return array(
-            'pERSONA' => array(self::BELONGS_TO, 'Persona', 'PERSONA_ID'),
             'cURSOEDICION' => array(self::BELONGS_TO, 'CursoEdicion', 'CURSO_EDICION_ID'),
         );
     }
@@ -55,7 +53,6 @@ abstract class BaseEvaluacionEstudiante extends AweActiveRecord {
                 'NOTA' => Yii::t('app', 'Nota'),
                 'PERSONA_ID' => Yii::t('app', 'Persona'),
                 'CURSO_EDICION_ID' => Yii::t('app', 'Curso Edicion'),
-                'pERSONA' => null,
                 'cURSOEDICION' => null,
         );
     }
