@@ -32,7 +32,7 @@ $this->menu = array(
             'columns' => array(
                 array(
                     'name' => 'FOTO',
-                    'value' => 'CHtml::image(Yii::app()->createUrl("/crm/persona/imagen?id=$data->ID"),"",array("width"=>"60"))',
+                    'value' => '$data->FOTO ? CHtml::image(Yii::app()->createUrl("/crm/persona/imagen?id=$data->ID"),"",array("width"=>"60")) : ""',
                     'type' => 'raw'
                 ),
                 'CEDULA',
@@ -61,6 +61,7 @@ $this->menu = array(
                     'buttons' => array(
                         'update' => array(
                             'label' => '<button class="btn btn-primary"><i class="icon-pencil"></i></button>',
+                            'url'=>'Yii::app()->createUrl("/crm/persona/update/id/$data->ID/tipo/$data->TIPO_PERSONA")',
                             'options' => array('title' => 'Actualizar'),
                             'imageUrl' => false,
                         //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_update"))'

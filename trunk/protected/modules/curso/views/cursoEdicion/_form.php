@@ -24,35 +24,35 @@ $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
 
         <?php // echo $form->datepickerRow($model, 'FECHA_INICIO', array('prepend' => '<i class="icon-calendar"></i>')) ?>
         <?php
-        echo $form->datepickerRow(
-                $model, 'FECHA_INICIO', array(
+        echo $form->datepickerRow($model, 'FECHA_INICIO', array(
             'options' => array(
                 'language' => 'es',
                 'readonly' => 'readonly',
+                'format' => 'dd/mm/yyyy',
             ),
-                )
-        );
+        ));
         ?>
 
-        <?php // echo $form->datepickerRow($model, 'FECHA_FINALIZACION', array('prepend' => '<i class="icon-calendar"></i>')) ?>
+        <?php // echo $form->datepickerRow($model, 'FECHA_FINALIZACION', array('prepend' => '<i class="icon-calendar"></i>'))  ?>
         <?php
-        echo $form->datepickerRow(
-                $model, 'FECHA_FINALIZACION', array(
+        echo $form->datepickerRow($model, 'FECHA_FINALIZACION', array(
             'options' => array(
                 'language' => 'es',
                 'readonly' => 'readonly',
+                'format' => 'dd/mm/yyyy',
             ),
-                )
-        );
+        ));
         ?>
 
         <?php echo $form->textFieldRow($model, 'AULA', array('maxlength' => 20)) ?>
 
-        <?php echo $form->textFieldRow($model, 'NRO_ESTUDIANTES') ?>
+        <?php // echo $form->textFieldRow($model, 'NRO_ESTUDIANTES')  ?>
 
         <?php echo $form->dropDownListRow($model, 'CURSO_ID', array('' => ' -- Seleccione -- ') + CHtml::listData(Curso::model()->findAll(), 'ID', Curso::representingColumn()), array('placeholder' => null)) ?>
 
-        <?php echo $form->dropDownListRow($model, 'HORARIO_ID', array('' => ' -- Seleccione -- ') + CHtml::listData(Horario::model()->findAll(), 'ID', Horario::representingColumn()), array('placeholder' => null)) ?>
+        <?php echo $form->textFieldRow($model, 'NRO_EDICION', array('maxlength' => 20)) ?>
+
+        <?php echo $form->dropDownListRow($model, 'HORARIO_ID', array('' => ' -- Seleccione -- ') + CHtml::listData(Horario::model()->findAll(), 'ID', 'horario_formato'), array('placeholder' => null)) ?>
 
         <div class="form-actions">
             <?php

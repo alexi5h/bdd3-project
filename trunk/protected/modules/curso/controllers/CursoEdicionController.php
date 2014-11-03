@@ -31,6 +31,9 @@ class CursoEdicionController extends AweController {
 
         if (isset($_POST['CursoEdicion'])) {
             $model->attributes = $_POST['CursoEdicion'];
+            $model->NRO_ESTUDIANTES = 0;
+            $model->FECHA_INICIO = Util::FormatDate($model->FECHA_INICIO, 'Y-m-d');
+            $model->FECHA_FINALIZACION = Util::FormatDate($model->FECHA_FINALIZACION, 'Y-m-d');
             if ($model->save()) {
 //                if (isset($_POST['CursoEdicion']['personas']))
 //                    $model->saveManyMany('personas', $_POST['CursoEdicion']['personas']);

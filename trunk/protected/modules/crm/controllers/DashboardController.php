@@ -24,9 +24,9 @@ class DashboardController extends Controller {
      * This is the action to handle external exceptions.
      */
     public function actionError() {
-        if (Yii::app()->user->isGuest) {
-            $this->redirect(Yii::app()->user->ui->loginUrl);
-        }
+//        if (Yii::app()->user->isGuest) {
+//            $this->redirect(Yii::app()->user->ui->loginUrl);
+//        }
         if ($error = Yii::app()->errorHandler->error) {
             if (Yii::app()->request->isAjaxRequest) {
                 echo $error['message'];

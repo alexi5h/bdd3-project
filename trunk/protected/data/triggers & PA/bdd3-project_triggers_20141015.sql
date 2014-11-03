@@ -119,7 +119,7 @@ end;
 $$
 delimiter ;
 
-/*Trigger que duplica los datos ingresados de cursos en la partición Edicion_curso*/
+/*Trigger que duplica los datos ingresados de cursos en la partición Edicion_curso
 DROP TRIGGER IF EXISTS curso_insert;
 delimiter $$
 create trigger curso_insert
@@ -131,6 +131,7 @@ INSERT INTO Edicion_curso VALUES(default, new.ID, new.NOMBRE, new.CONTENIDO, new
 end;                          
 $$
 delimiter ;
+*/
 
 /*Trigger que actualiza los cambios hechos de cursos en la partición Edicion_curso*/
 DROP TRIGGER IF EXISTS curso_update;

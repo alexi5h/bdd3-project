@@ -30,8 +30,6 @@ class PersonaController extends AweController {
         $this->performAjaxValidation($model, 'persona-form');
 
         if (isset($_POST['Persona'])) {
-//            var_dump($_FILES["Persona"]["error"]["FOTO"]);
-//            die();
             //comprobamos si ha ocurrido un error.
             if (!isset($_FILES["Persona"]) || $_FILES["Persona"]["error"]["FOTO"] > 0) {
                 echo "ha ocurrido un error";
@@ -52,7 +50,6 @@ class PersonaController extends AweController {
                     $data = fread($fp, filesize($imagen_temporal));
 //                    $data=  addslashes($data);
                     fclose($fp);
-
                     //escapar los caracteres
                     $data = mysql_real_escape_string($data);
 //                    var_dump($data);
@@ -69,10 +66,6 @@ class PersonaController extends AweController {
                 }
             }
             $model->attributes = $_POST['Persona'];
-
-//            $model->FOTO = $data;
-//            var_dump($model->FOTO);
-//            die();
             if ($model->save()) {
                 $id = $model->ID;
                 Persona::model()->guardarImg($id, $data);
@@ -92,18 +85,57 @@ class PersonaController extends AweController {
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id the ID of the model to be updated
      */
-    public function actionUpdate($id) {
-        $model = $this->loadModel($id);
-
+    public function actionUpdate($id, $tipo) {
+        $model = Persona::model()->findByPk(array('ID' => $id, 'TIPO_PERSONA' => $tipo));
+        $model->FOTO = mysql_real_escape_string($model->FOTO);
+//        var_dump(mysql_real_escape_string($model->FOTO));
+//        die();
+//        $model = $this->loadModel($id);
+        $data = $model->FOTO;
         $this->performAjaxValidation($model, 'persona-form');
 
         if (isset($_POST['Persona'])) {
+            if (!isset($_FILES["Persona"]) || $_FILES["Persona"]["error"]["FOTO"] > 0) {
+                echo "ha ocurrido un error";
+            } else {
+                //ahora vamos a verificar si el tipo de archivo es un tipo de imagen permitido.
+                //y que el tamano del archivo no exceda los 16MB
+                $permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
+                $limite_kb = 16384;
+//                var_dump($_FILES["Persona"]);
+//                die();
+                if (in_array($_FILES['Persona']['type']["FOTO"], $permitidos) && $_FILES['Persona']['size']["FOTO"] <= $limite_kb * 1024) {
+                    //este es el archivo temporal
+                    $imagen_temporal = $_FILES['Persona']['tmp_name']["FOTO"];
+                    //este es el tipo de archivo
+                    $tipo = $_FILES['Persona']['type']["FOTO"];
+                    //leer el archivo temporal en binario
+                    $fp = fopen($imagen_temporal, 'r+b');
+                    $data = fread($fp, filesize($imagen_temporal));
+//                    $data=  addslashes($data);
+                    fclose($fp);
+                    //escapar los caracteres
+                    $data = mysql_real_escape_string($data);
+//                    var_dump($data);
+//                    die();
+//                    $resultado = @mysql_query("INSERT INTO imagenes (imagen, tipo_imagen) VALUES ('$data', '$tipo')");
+//
+//                    if ($resultado) {
+//                        echo "el archivo ha sido copiado exitosamente";
+//                    } else {
+//                        echo "ocurrio un error al copiar el archivo.";
+//                    }
+                } else {
+                    echo "archivo no permitido, es tipo de archivo prohibido o excede el tamano de $limite_kb Kilobytes";
+                }
+            }
             $model->attributes = $_POST['Persona'];
             if ($model->save()) {
-                if (isset($_POST['Persona']['cursoEdicions']))
-                    $model->saveManyMany('cursoEdicions', $_POST['Persona']['cursoEdicions']);
-                else
-                    $model->saveManyMany('cursoEdicions', array());
+                Persona::model()->guardarImg($model->ID, $data);
+//                if (isset($_POST['Persona']['cursoEdicions']))
+//                    $model->saveManyMany('cursoEdicions', $_POST['Persona']['cursoEdicions']);
+//                else
+//                    $model->saveManyMany('cursoEdicions', array());
                 $this->redirect(array('admin'));
             }
         }
@@ -170,7 +202,6 @@ class PersonaController extends AweController {
 
             //ahora colocamos la cabeceras correcta segun el tipo de imagen
             header("Content-type: $tipo");
-
             echo $imagen;
         }
     }

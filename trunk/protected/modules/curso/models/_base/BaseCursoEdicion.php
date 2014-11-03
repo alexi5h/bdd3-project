@@ -44,8 +44,8 @@ abstract class BaseCursoEdicion extends AweActiveRecord {
 
     public function rules() {
         return array(
-            array('ID, NRO_EDICION, FECHA_INICIO, FECHA_FINALIZACION, AULA, NRO_ESTUDIANTES, CURSO_ID, HORARIO_ID', 'required'),
-            array('ID, NRO_EDICION, NRO_ESTUDIANTES, CURSO_ID, HORARIO_ID', 'numerical', 'integerOnly'=>true),
+            array('NRO_EDICION, FECHA_INICIO, FECHA_FINALIZACION, AULA, NRO_ESTUDIANTES, CURSO_ID, HORARIO_ID', 'required'),
+            array('NRO_EDICION, NRO_ESTUDIANTES, CURSO_ID, HORARIO_ID', 'numerical', 'integerOnly'=>true),
             array('AULA', 'length', 'max'=>20),
             array('ID, NRO_EDICION, FECHA_INICIO, FECHA_FINALIZACION, AULA, NRO_ESTUDIANTES, CURSO_ID, HORARIO_ID', 'safe', 'on'=>'search'),
         );

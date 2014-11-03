@@ -56,10 +56,6 @@ class CursoController extends AweController {
         if (isset($_POST['Curso'])) {
             $model->attributes = $_POST['Curso'];
             if ($model->save()) {
-                if (isset($_POST['Curso']['materialDidacticos']))
-                    $model->saveManyMany('materialDidacticos', $_POST['Curso']['materialDidacticos']);
-                else
-                    $model->saveManyMany('materialDidacticos', array());
                 $this->redirect(array('admin'));
             }
         }
