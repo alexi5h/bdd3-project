@@ -230,11 +230,7 @@ CREATE TABLE `persona` (
   `NRO_CURSOS_APROBADOS` int(11) DEFAULT NULL,
   `FOTO` mediumblob,
   PRIMARY KEY (`ID`,`TIPO_PERSONA`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=latin1
-partition by list(TIPO_PERSONA)(
-  partition partEstudiante values in (1),
-  partition partDefault values in (2,3)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=latin1;
 
 #
 # Structure for table "persona_frg1"
