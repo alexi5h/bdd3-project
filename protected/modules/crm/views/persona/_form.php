@@ -2,6 +2,7 @@
 /** @var PersonaController $this */
 /** @var Persona $model */
 /** @var AweActiveForm $form */
+var_dump($model->FOTO);
 $form = $this->beginWidget('ext.AweCrud.components.AweActiveForm', array(
     'type' => 'horizontal',
     'id' => 'persona-form',

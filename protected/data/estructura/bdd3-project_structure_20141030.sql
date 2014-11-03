@@ -1,5 +1,5 @@
 # Host: localhost  (Version: 5.5.24-log)
-# Date: 2014-10-30 21:49:32
+# Date: 2014-10-30 23:32:41
 # Generator: MySQL-Front 5.3  (Build 4.175)
 
 /*!40101 SET NAMES latin1 */;
@@ -50,7 +50,7 @@ CREATE TABLE `edicion_curso` (
   `NRO_ESTUDIANTES` int(11) DEFAULT NULL,
   `HORARIO_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
 
 #
 # Structure for table "horario"
@@ -70,7 +70,7 @@ CREATE TABLE `horario` (
 #
 
 CREATE TABLE `curso_edicion` (
-  `ID` int(11) NOT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `NRO_EDICION` int(11) NOT NULL,
   `FECHA_INICIO` date NOT NULL,
   `FECHA_FINALIZACION` date NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE `curso_edicion` (
   PRIMARY KEY (`ID`),
   KEY `fk_curso_edicion_horario1_idx` (`HORARIO_ID`),
   CONSTRAINT `fk_curso_edicion_horario1` FOREIGN KEY (`HORARIO_ID`) REFERENCES `horario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 #
 # Structure for table "formulario"
@@ -230,7 +230,11 @@ CREATE TABLE `persona` (
   `NRO_CURSOS_APROBADOS` int(11) DEFAULT NULL,
   `FOTO` mediumblob,
   PRIMARY KEY (`ID`,`TIPO_PERSONA`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=latin1
+partition by list(TIPO_PERSONA)(
+  partition partEstudiante values in (1),
+  partition partDefault values in (2,3)
+);
 
 #
 # Structure for table "persona_frg1"
@@ -350,16 +354,6 @@ end;
 CREATE DEFINER='root'@'localhost' TRIGGER `bdd3-project`.`curso_delete` AFTER DELETE ON `bdd3-project`.`curso`
   FOR EACH ROW begin
 DELETE FROM Edicion_curso WHERE ID_CURSO=OLD.ID;
-end;
-
-#
-# Trigger "curso_insert"
-#
-
-CREATE DEFINER='root'@'localhost' TRIGGER `bdd3-project`.`curso_insert` AFTER INSERT ON `bdd3-project`.`curso`
-  FOR EACH ROW begin
-INSERT INTO Edicion_curso VALUES(default, new.ID, new.NOMBRE, new.CONTENIDO, new.PRERREQUISITOS,
-	new.ESPECIALIDAD,null,null,null,null,null,null,null);
 end;
 
 #

@@ -2,7 +2,7 @@
 /** @var CursoEdicionController $this */
 /** @var CursoEdicion $model */
 $this->menu = array(
-    array('label' => Yii::t('AweCrud.app', 'Create'), 'icon' => 'plus', 'url' => array('create'), 
+    array('label' => Yii::t('AweCrud.app', 'Create'), 'icon' => 'plus', 'url' => array('create'),
     //'visible' => (Util::checkAccess(array('action_incidenciaPrioridad_create')))
     ),
 );
@@ -20,27 +20,35 @@ $this->menu = array(
     </div>
     <div class="widget-body">
 
-            <?php 
-        $this->widget('bootstrap.widgets.TbGridView',array(
-        'id' => 'curso-edicion-grid',
-        'type' => 'striped bordered hover advance',
-        'dataProvider' => $model->search(),
-        'columns' => array(
-                    'FECHA_INICIO',
-                        'FECHA_FINALIZACION',
-                        'AULA',
-                        'NRO_ESTUDIANTES',
-                        array(
+        <?php
+        $this->widget('bootstrap.widgets.TbGridView', array(
+            'id' => 'curso-edicion-grid',
+            'type' => 'striped bordered hover advance',
+            'dataProvider' => $model->search(),
+            'columns' => array(
+                array(
                     'name' => 'CURSO_ID',
-                    'value' => 'isset($data->cURSO) ? $data->cURSO : null',
-                    'filter' => CHtml::listData(Curso::model()->findAll(), 'ID', Curso::representingColumn()),
+                    'value' => '$data->curso'
                 ),
-                        array(
+                'FECHA_INICIO',
+                'FECHA_FINALIZACION',
+                'AULA',
+                'NRO_ESTUDIANTES',
+//                array(
+//                    'name' => 'CURSO_ID',
+//                    'value' => 'isset($data->cURSO) ? $data->cURSO : null',
+//                    'filter' => CHtml::listData(Curso::model()->findAll(), 'ID', Curso::representingColumn()),
+//                ),
+//                array(
+//                    'name' => 'HORARIO_ID',
+//                    'value' => 'isset($data->hORARIO) ? $data->hORARIO : null',
+//                    'filter' => CHtml::listData(Horario::model()->findAll(), 'ID', Horario::representingColumn()),
+//                ),
+                array(
                     'name' => 'HORARIO_ID',
-                    'value' => 'isset($data->hORARIO) ? $data->hORARIO : null',
-                    'filter' => CHtml::listData(Horario::model()->findAll(), 'ID', Horario::representingColumn()),
+                    'value' => '$data->horario->horario_formato'
                 ),
-                    array(
+                array(
                     'class' => 'CButtonColumn',
                     'template' => '{update} {delete}',
                     'afterDelete' => 'function(link,success,data){ 
@@ -55,20 +63,21 @@ $this->menu = array(
                             'label' => '<button class="btn btn-primary"><i class="icon-pencil"></i></button>',
                             'options' => array('title' => 'Actualizar'),
                             'imageUrl' => false,
-                             //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_update"))'
+                        //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_update"))'
                         ),
                         'delete' => array(
                             'label' => '<button class="btn btn-danger"><i class="icon-trash"></i></button>',
                             'options' => array('title' => 'Eliminar'),
                             'imageUrl' => false,
-                            //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_delete"))'
+                        //'visible' => 'Util::checkAccess(array("action_incidenciaPrioridad_delete"))'
                         ),
                     ),
                     'htmlOptions' => array(
                         'width' => '80px'
                     )
                 ),
-        ),
-        )); ?>
+            ),
+        ));
+        ?>
     </div>
 </div>

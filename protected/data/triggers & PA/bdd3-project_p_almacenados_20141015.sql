@@ -9,7 +9,7 @@ inner join banco_deposito bd on ce.id=bd.curso_edicion_id
 inner join banco ba on bd.banco_id=ba.id
 inner join persona pe on ba.persona_id=pe.id
 inner join curso_edicion_has_personas cep on cep.curso_edicion_id=ce.id and cep.persona_id=pe.id
-where pe.cedula=cedulaIns and pe.tipo_persona='INSTRUCTOR';
+where pe.cedula=cedulaIns and pe.tipo_persona=3;
 END
 
 //
@@ -26,7 +26,7 @@ select concat(concat(ho.hora_inicio,' '), ho.hora_fin) as horario, ce.aula, conc
 from curso_edicion ce inner join curso_edicion_has_personas cep on cep.curso_edicion_id=ce.id
 inner join horario ho on ce.horario_id=ho.id
 inner join persona pe on cep.persona_id=pe.id
-where pe.tipo_persona='INSTRUCTOR' and ce.curso_id=codigoCurso and ce.nro_edicion=numEdicion;
+where pe.tipo_persona=3 and ce.curso_id=codigoCurso and ce.nro_edicion=numEdicion;
 END
 
 //
