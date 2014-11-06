@@ -209,3 +209,19 @@ DELETE FROM Edicion_curso WHERE ID_EDICION=OLD.ID;
 end;
 $$
 delimiter ;
+
+drop trigger if exists control_fecha_matriculas;
+DELIMITER &&
+CREATE TRIGGER control_fecha_matriculas
+before insert on curso_edicion_has_personas
+for each row
+begin
+declare fecha_fin date;
+select ce.fecha_finalizacion into fecha_fin from curso_edicion ce
+where ce.id=new.curso_edicion_id;
+if fecha_fin<now() then 
+SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Fecha de matricula expirada.!!';
+end if;
+end;
+&&
+delimiter ;
