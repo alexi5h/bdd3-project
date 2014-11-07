@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.6.12)
-# Date: 2014-11-07 01:05:24
+# Date: 2014-11-07 01:08:15
 # Generator: MySQL-Front 5.3  (Build 4.136)
 
 /*!40101 SET NAMES utf8 */;
@@ -338,6 +338,20 @@ INNER JOIN CURSO CU ON CU.ID=CE.CURSO_ID
 WHERE CU.NOMBRE=ES.NOMBRE_CURSO AND CE.NRO_EDICION=ES.NRO_INSTANCIA)
 WHERE ES.PAGO_A_PROFESOR=0;
 END;
+
+#
+# Trigger "control_fecha_matriculas"
+#
+
+CREATE DEFINER='root'@'localhost' TRIGGER `bdd3-project`.`control_fecha_matriculas` BEFORE INSERT ON `bdd3-project`.`curso_edicion_has_personas`
+  FOR EACH ROW begin
+declare fecha_fin date;
+select ce.fecha_finalizacion into fecha_fin from curso_edicion ce
+where ce.id=new.curso_edicion_id;
+if fecha_fin<now() then 
+SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Fecha de matricula expirada.!!';
+end if;
+end;
 
 #
 # Trigger "control_num_matriculas"
